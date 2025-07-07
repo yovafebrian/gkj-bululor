@@ -1,4 +1,9 @@
-<nav class="fixed top-0 left-0 w-full bg-white/80 dark:bg-gray-900/90 backdrop-blur-md shadow-md z-50 transition-colors duration-300">
+<style>
+    #navbar {
+        transition: background-color 0.3s ease;
+    }
+</style>
+<nav id="navbar" class="fixed top-0 left-0 w-full bg-transparent backdrop-blur-md z-50 transition-colors duration-300">
     <div class="container  flex justify-between items-center p-4">
         <!-- Logo -->
         <a href="/" class="flex items-center text-xl font-bold text-blue-600 dark:text-white transition-all duration-300 hover:scale-[1.02] space-x-2">
@@ -9,8 +14,7 @@
         <!-- icon dark and light -->
         <div class="flex items-center space-x-4">
             <!-- Theme Toggle -->
-            <button onclick="toggleTheme()" class="theme-toggle p-2 rounded-full   text-gray-800 dark:text-gray-200 dark:bg-gray-900  transition-colors duration-300">
-                
+            <button onclick="toggleTheme()" class="theme-toggle p-2 rounded-full   text-gray-800 dark:text-gray-200   transition-colors duration-300">
             </button>
             
             <!-- Mobile Menu Button -->
@@ -26,9 +30,9 @@
 
         <!-- Desktop Menu -->
         <div id="menu" class="hidden md:flex items-center">
-            <ul class="flex flex-col md:flex-row md:space-x-6 absolute md:relative top-full left-0 w-full md:w-auto bg-white dark:bg-gray-900 md:bg-transparent shadow-lg md:shadow-none md:static transition-colors duration-300">
+            <ul class="flex flex-col md:flex-row md:space-x-6 absolute md:relative top-full left-0 w-full md:w-auto bg-white  md:bg-transparent shadow-lg md:shadow-none md:static transition-colors duration-300">
                 <li><a href="/home" class="block py-2 px-4 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Beranda</a></li>
-                <li><a href="/kegiatan" class="block py-2 px-4 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Kegiatan</a></li>
+                <li><a href="/kegiatan" class="block py-2 px-4 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Tentang Kami</a></li>
 
                 <!-- Profile Dropdown -->
                 <li class="relative group">
@@ -39,7 +43,7 @@
                         </svg>
                     </button>
                     <ul class="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-700 shadow-lg rounded-md py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 -translate-y-2">
-                        <li><a href="/profile" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors">test</a></li>
+                        <li><a href="/profile" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors"></a></li>
                         <li><a href="https://instagram.com" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors">test</a></li>
                         <li><a href="/" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors">test</a></li>
                     </ul>
@@ -57,7 +61,7 @@
                         <li><a href="/tugas-daring" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors">test</a></li>
                     </ul>
                 </li>
-                <li><a href="" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors">test</a></li>
+                <li><a href="" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600 transition-colors">Ibadah & Jadwal </a></li>
                 <!-- Dropdown Kontak -->
                 <li class="relative group">
                     <button class="flex items-center py-2 px-4 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors">
@@ -75,64 +79,15 @@
         </div>
     </div>
 </nav>
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuButton = document.querySelector('#menu-button');
-        const menu = document.querySelector('#menu');
-        const menuIcon = document.querySelector('#menu-icon');
-        const closeIcon = document.querySelector('#close-icon');
-
-        // Toggle mobile menu
-        menuButton.addEventListener('click', function() {
-            const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
-            menuButton.setAttribute('aria-expanded', !isExpanded);
-            menu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-        });
-
-        // Close menu when clicking outside on responsive design
-        document.addEventListener('click', function(event) {
-            if (window.innerWidth < 768) {
-                const isClickInside = menu.contains(event.target) || menuButton.contains(event.target);
-                if (!isClickInside && !menu.classList.contains('hidden')) {
-                    menu.classList.add('hidden');
-                    menuButton.setAttribute('aria-expanded', 'false');
-                    menuIcon.classList.remove('hidden');
-                    closeIcon.classList.add('hidden');
-                }
-            }
-        });
-
-        // Handle dropdowns on responsive design
-        document.querySelectorAll('li.group').forEach(item => {
-            const button = item.querySelector('button');
-            const dropdown = item.querySelector('ul');
-
-            if (window.innerWidth < 768) {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    dropdown.classList.toggle('hidden');
-                    dropdown.classList.toggle('block');
-                });
-            }
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            if (window.innerWidth >= 768) {
-                menu.classList.remove('hidden');
-                menuButton.setAttribute('aria-expanded', 'false');
-                menuIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-                
-                // Hide all mobile dropdowns
-                document.querySelectorAll('li.group ul').forEach(dropdown => {
-                    dropdown.classList.add('hidden');
-                    dropdown.classList.remove('block');
-                });
-            }
-        });
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY === 0) {
+            navbar.classList.remove('bg-black', 'bg-black/80');
+            navbar.classList.add('bg-transparent');
+        } else {
+            navbar.classList.remove('bg-transparent');
+            navbar.classList.add('bg-black/80'); // hitam semi transparan
+        }
     });
 </script>
